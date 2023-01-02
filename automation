@@ -1,0 +1,4 @@
+#To create a cron job that runs the script automation.sh everyday via the root user
+
+1 */24 * * * root /home/ubuntu/Automation_Project/automation.sh
+
