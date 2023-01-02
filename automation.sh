@@ -58,10 +58,21 @@ mv $FileName /tmp
 s3_bucket="upgrad-zhuocheng"
 aws s3 cp /tmp/$FileName s3://${s3_bucket}/$FileName
 
+########################################## Task 3 #########################################
 
+# Ensure that your script checks for the presence of the inventory.html file in /var/www/html/; if not found, creates it.
 
+# create a variable to check 
+File=/var/www/html/inventory.html
 
-
-
-
+if [ -f "$File" ]; then
+	echo "$File exists."
+	echo "<table width="500" cellspacing="12"><tr><td align="middle">httpd-logs</td><td align="middle">${timestamp}</td><td align="left">tar</td><td align="middle">${sizeOfTar}</td></tr></table>" >>$File
+else
+	echo "$File does not exist now we create a file."
+	sudo touch $File
+	sudo chmod 777 $File
+	echo "<table width="500" cellspacing="12"><tr><th>Log Type</th><th>Date Created</th><th>Type</th><th>Size</th></tr></table>" >>$File
+	echo "<table width="500" cellspacing="12"><tr><td align="middle">httpd-logs</td><td align="middle">${timestamp}</td><td align="left">tar</td><td align="middle">${sizeOfTar}</td></tr></table>" >>$File
+fi
 
